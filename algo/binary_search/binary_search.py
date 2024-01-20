@@ -1,14 +1,16 @@
 from typing import Union
 
 
-def search(a: list, t: Union[int, str], l=0, h=None) -> int:
-    h = h or len(a) - 1
-    if l > h:
+def search(arr: list, t: Union[int, str], low=0, high=None) -> int:
+    high = high or len(arr) - 1
+
+    if low > high:
         return -1
-    m = l + (h - l) // 2
-    if a[m] == t:
-        return m
-    elif t < a[m]:
-        return search(a, t, l, m - 1)
+    mid = low + (high - low) // 2
+
+    if arr[mid] == t:
+        return mid
+    elif t > arr[mid]:
+        return search(arr, t, mid + 1, high)
     else:
-        return search(a, t, m + 1, h)
+        return search(arr, t, low, mid - 1)
